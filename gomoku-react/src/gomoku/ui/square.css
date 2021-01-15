@@ -1,0 +1,14 @@
+button {
+    width: 51px;
+    height: 51px;
+    background-color: transparent;
+    border: none;
+}
+
+button.white {
+    background-image: url('../../assets/whitePiece.png');
+}
+
+button.black {
+    background-image: url('../../assets/blackPiece.png');
+}
