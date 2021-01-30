@@ -1,0 +1,15 @@
+.square {
+    width: 51px;
+    height: 51px;
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+}
+
+.square.white {
+    background-image: url('../../../assets/whitePiece.png');
+}
+
+.square.black {
+    background-image: url('../../../assets/blackPiece.png');
+}

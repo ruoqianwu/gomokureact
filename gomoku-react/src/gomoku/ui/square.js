@@ -1,5 +1,5 @@
 import React from 'react'
-import './square.css'
+import './stylesheets/square.css'
 
 class Square extends React.Component {
 
@@ -8,7 +8,10 @@ class Square extends React.Component {
                      top: `${this.props.y}px`,
                      left: `${this.props.x}px`}
         return (
-            <button className={this.props.color} style={style} onClick={() => this.props.onClick()}>
+            <button className = {`square ${this.props.color}`}
+                    style = {style} 
+                    onClick = {() => this.props.onClick()}
+                    disabled = {!this.props.isMyTurn}>
             </button>
         )
     }

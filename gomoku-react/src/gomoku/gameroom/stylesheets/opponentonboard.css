@@ -1,0 +1,22 @@
+.opponentonboard {
+    align-items: center;
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -0%);
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+.opponentonboard > h1 {
+    text-align: center;
+    margin-top: 7%;
+    font-size: 3vw;
+    margin-bottom: 4%;
+}
+
+.opponentonboard > div > Button {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
