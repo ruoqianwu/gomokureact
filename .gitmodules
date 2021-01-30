@@ -1,0 +1,3 @@
+[submodule "react-gomoku-backend"]
+	path = react-gomoku-backend
+	url = https://git.heroku.com/react-gomoku-backend.git
