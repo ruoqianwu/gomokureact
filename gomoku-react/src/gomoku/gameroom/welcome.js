@@ -16,6 +16,9 @@ const Welcome = () => {
                 <Button className = {'welcome-button'} size = 'large'>
                     <Link to = {"/opponentonboard"} className="welcome-link">join game</Link>
                 </Button>
+                <Button className = {'welcome-button'} size = 'large'>
+                    <Link to = {"/aigame"} className="welcome-link">AI game</Link>
+                </Button>
             </div>
         </div>
     )

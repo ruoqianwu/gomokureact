@@ -1,7 +1,7 @@
 import React from 'react'
 import BoardImage from '../../assets/gameboard.jpg'
 import Square from './square.js';
-import winCondition from '../model/game.js';
+import winCondition from '../model/winCondition.js';
 import StatusBar from './statusbar.js'
 import { socket } from '../../connection/socket'
 import Sound from '../../assets/clickSound.mp3'

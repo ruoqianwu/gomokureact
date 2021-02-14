@@ -8,6 +8,7 @@ import Room from './gomoku/ui/room';
 import JoinRoom from './gomoku/gameroom/joinroom';
 import OpponentOnboard from './gomoku/gameroom/opponentonboard';
 import Welcome from './gomoku/gameroom/welcome'
+import AIroom from './gomoku/ui/AIroom'
 
 
 function App() {
@@ -47,6 +48,9 @@ const [username, setUsername] = React.useState('');
               :
               <JoinRoom></JoinRoom>
             }
+          </Route>
+          <Route path = '/aigame' exact>
+            <AIroom></AIroom>
           </Route>
           <Redirect to = "/" />
         </Switch>
