@@ -145,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 
-export function WinnerModal(props) {
+export function WinnerModal() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [winner, setWinner] = React.useState('');

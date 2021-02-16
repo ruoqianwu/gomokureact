@@ -5,16 +5,18 @@ import winCondition from '../model/winCondition.js';
 import Button from '@material-ui/core/Button'
 import aiMove from '../model/AI/ai.js'
 import './stylesheets/AIroom.css'
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import { Redirect } from 'react-router-dom'
 
 
 const AIboard = (props) => {
 
     const [squares, setSquares] = React.useState(Array(15).fill(null).map(row => new Array(15).fill(null)));
     const [winner, setWinner] = React.useState('');
-
-    React.useEffect(() => {
-        winner !== '' && alert(`The winner is ${winner}!`);
-    }, [winner]);
+    const [didredirect, setDidRedirect] = React.useState(false);
 
 
     const handleClick = (i, j) => {
@@ -35,6 +37,9 @@ const AIboard = (props) => {
         setSquares(newSquares);
         if (winCondition(newSquares, i, j)==='black' || winCondition(newSquares, i, j)==='white') {
             setWinner(winCondition(newSquares, i, j));
+            setTimeout(() => {
+                setDidRedirect(true)
+            }, 5000);
             return;
         }
         let tempSquares = squares.slice();
@@ -44,6 +49,9 @@ const AIboard = (props) => {
         setSquares(tempSquares)
         if (winCondition(tempSquares, aimove[0], aimove[1])==='black' || winCondition(tempSquares, aimove[0], aimove[1])==='white') {
             setWinner(winCondition(tempSquares, aimove[0], aimove[1]));
+            setTimeout(() => {
+                setDidRedirect(true)
+            }, 5000);
         }
     }
 
@@ -63,6 +71,8 @@ const AIboard = (props) => {
         board[7][7] = "black"
     }
     return (
+        didredirect ? 
+        <Redirect to = '/' exact/> :
         <React.Fragment>
         <div style = {{
                 backgroundImage: `url(${BoardImage})`,
@@ -78,6 +88,7 @@ const AIboard = (props) => {
                 )
             })}
         </div>
+        <AIWinnerModal winner = {winner}/>
     </React.Fragment>
     )
 }
@@ -134,3 +145,62 @@ const AIroom = () => {
 }
 
 export default AIroom;
+
+const useStyles = makeStyles((theme) => ({
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+      },
+}));
+
+export function AIWinnerModal({winner}) {
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const [counter, setCounter] = React.useState(5);
+    React.useEffect(() => {
+            if (winner === 'white' || winner === 'black') {
+                setOpen(true);
+                setCounter(5)
+            }
+    }, [winner])
+    React.useEffect(() => {
+        if (counter > 0) {
+            setTimeout(()=> {setCounter(counter - 1)}, 1000);  
+        }
+    }, [counter])
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    return (
+      <div>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <h2 id="transition-modal-title">The game has ended!</h2>
+              <p id="transition-modal-description">{winner} player won the game! <br/> Redirect in {counter} seconds</p>
+            </div>
+          </Fade>
+        </Modal>
+      </div>
+    );
+}
